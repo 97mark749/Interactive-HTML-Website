@@ -1,0 +1,272 @@
+<html>
+
+<head>
+	<title>Language Convertors</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- Scripts -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.scrollex.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="parallax.min.js"></script>
+	<script src="https://kit.fontawesome.com/e10847db4d.js" crossorigin="anonymous"></script>
+
+	<script language="JavaScript1.1">
+		globalVowels = "AEIOUaeiou"; //Standard Vowels
+		globalVowelsy = "AEIOUaeiouYy"; //Sometimes Y is considered a vowel, we take that into consideration
+		globalWay = "way"; //Vowel word suffix
+		globalAy = "ay"; //Constant vowel suffix
+		MAXLENGTH = 65;
+
+		function verifyEntry(stringL) {
+			if (isNaN(parseInt(stringL))) {
+				document.frmTranslate.maxLength.value = MAXLENGTH;
+				stringL = MAXLENGTH;
+			}
+			if (stringL < 30) {
+				document.frmTranslate.maxLengthText.value = 30;
+			}
+			if (stringL > 75) {
+				document.frmTranslate.maxLengthText.value = 75;
+			}
+			return;
+		}
+
+		function clearTextBox() {
+			document.frmTranslate.englishText.value = "";
+			document.frmTranslate.englishText.focus();
+			return;
+		}
+
+		function selectText(target) {
+			eval("document.frmTranslate." + target + ".focus()");
+			eval("document.frmTranslate." + target + ".select()");
+			return;
+		}
+
+		function tran() {
+			var changeText;
+			var changePigLatin;
+			var changeLine;
+			var changeWord;
+			var checkWord;
+			var changeChar;
+			var changeNewLine;
+			var checkMaxLength;
+
+			if (navigator.appVersion.lastIndexOf("Win") != -1) {
+				changeNewLine = "\r\n";
+			} else {
+				changeNewLine = "\n";
+			}
+
+			changeText = document.frmTranslate.englishText.value;
+			checkMaxLength = document.frmTranslate.maxLengthText.value;
+
+			changePigLatin = "";
+			changeLine = "";
+			changeWord = "";
+			checkWord = true;
+
+			for (var i = 0; i <= changeText.length; i++) {
+				changeChar = changeText.charAt(i);
+
+				if ((changeChar >= "A" && changeChar <= "Z") || (changeChar >= "a" && changeChar <= "z") || (changeChar >= "'" && checkWord && changeChar <= "")) {
+
+					if (!checkWord) {
+
+						if (changeLine.length + changeWord.length >= checkMaxLength) {
+							changePigLatin += changeLine + changeNewLine;
+							changeLine = "";
+						}
+
+						changeLine += changeWord;
+						changeWord = "";
+						checkWord = true;
+					}
+
+					changeWord += changeChar;
+
+				} else {
+
+					if (checkWord && changeWord != "") {
+						changeWord = pigL(changeWord);
+
+						if (changeLine.length + changeWord.length >= checkMaxLength) {
+							changePigLatin += changeLine += changeNewLine;
+							changeLine = "";
+						}
+
+						changeLine += changeWord;
+						changeWord = "";
+					}
+
+					changeWord += changeChar;
+					checkWord = false;
+
+					if (changeChar == "\r" || changeChar == "\n") {
+						changePigLatin += changeLine + changeWord;
+						changeLine = "";
+						changeWord = "";
+					}
+
+				}
+			}
+			changePigLatin += changeLine + changeWord;
+			document.frmTranslate.pigLatinText.value = changePigLatin;
+			selectText("englishText");
+		}
+
+		function pigL(wordToChange) {
+
+			var changeWord;
+			var changeFirst;
+			var changeSuffix;
+			var changeLast;
+			var checkCapital;
+			var isCapital;
+
+			changeWord = wordToChange;
+			changeFirst = changeWord.charAt(0);
+			checkCapital = (changeFirst == changeFirst.toUpperCase()) ? true : false;
+			changeSuffix = "";
+
+			if (globalVowels.lastIndexOf(changeFirst) >= 0) {
+				changeSuffix = globalWay;
+				changeLast = changeWord.charAt(changeWord.length - 1)
+
+				if (changeLast == changeLast.toUpperCase() && changeWord.length > 1) {
+					changeSuffix = globalWay.toUpperCase();
+				}
+
+			} else {
+
+				if (changeWord != changeWord.toUpperCase()) {
+					changeFirst = changeFirst.toLowerCase();
+				}
+
+				var i = changeWord.length;
+
+				while (i--) {
+					changeSuffix += changeFirst;
+					changeLast = changeFirst;
+
+					isCapital = (changeFirst == changeFirst.toUpperCase()) ? true : false;
+
+					changeWord = changeWord.substring(1, changeWord.length);
+					changeFirst = changeWord.charAt(0);
+
+					if (globalVowelsy.lastIndexOf(changeFirst) >= 0) {
+						if (!((changeLast == "q" || changeLast == "Q") && (changeFirst == "u" || changeFirst == "U"))) {
+							break;
+						}
+					}
+				}
+
+				if (isCapital) {
+					changeSuffix += globalAy.toUpperCase();
+				} else {
+					changeSuffix += globalAy;
+				}
+			}
+			changeWord += changeSuffix;
+
+			if (checkCapital) {
+				changeFirst = changeWord.charAt(0);
+				changeWord = changeFirst.toUpperCase() + changeWord.substring(1, changeWord.length);
+			}
+			return changeWord;
+		}
+	</script>
+</head>
+
+<body>
+	<header id="header" class="alt">
+		<div class="logo"><a href="index.html">Conversion Paradise <span> | Mark Kirby - Ryan Steup |</span></a></div>
+		<a href="#menu">Menu</a>
+	</header>
+
+	<!-- Navigation Bar-->
+	<nav id="menu">
+		<ul class="links">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="common.html">Common Convertors</a></li>
+			<li><a href="languages.html.html">languages</a></li>
+			<li><a href="other.html">Conversion Charts</a></li>
+		</ul>
+		<marquee direction="left" style="padding:5px; color:#e1f5fc;">Welcome to the Language Conversion Page!
+		</marquee>
+	</nav>
+
+	<!--Section 1-->
+	<section id="One" class="package style-2">
+		<div class="inner">
+			<header class="align-center">
+				<p>Converstion of English to Pig Latin</p>
+				<h2>Pig Latin Generator</h2>
+			</header>
+		</div>
+	</section>
+
+	<!--Section 2-->
+	<section id="two" class="package style-1">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<header class="align-center">
+						<p>English <---> Pig Latin</p>
+						<h2>Pig Latin</h2>
+					</header>
+					<form name="frmTranslate">
+						<h3>Enter English Text To Translate:</h3>
+						<br>
+						<textarea name="englishText" class="text-area" rows="8" cols="70"
+							placeholder="Insert English Text Here!"></textarea>
+						<br>
+						<br>
+						<input value="Translate" onclick="tran()" type="button">
+						<input value="Select All" onClick="selectText('englishText')" type="button">
+						<input value="Clear Text" onClick="clearTextBox()" type="button">
+
+						<br>
+						<br>>
+						<br>
+
+						<h3>Pig Latin Genorator:</h3>
+						<textarea name="pigLatinText" class="text-area" rows="8" cols="70"
+							placeholder="The Pig Latin translation of the text above will be displayed here!"></textarea>
+						<br>
+						<br>
+						<input value="Select All" onClick="selectText('pigLatinText')" type="button">
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<br>
+						<br>
+						<p style="color:#183438;">Maximun Line Length:</p>
+						<input name="maxLengthText" class="input-txt-box" value="65" size="3" maxlength="2"
+							onchange="verifyEntry(this.value)" type="text">
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div>
+			<ul>
+				<li><a href="http://www.instagram.com"><span class="label">Instagram</span></a></li>
+				<li><a href="http://www.twitter.com"><span class="label">Twitter</span></a></li>
+				<li><a href="http://www.facebook.com"><span class="label">Facebook</span></a></li>
+				<li><a href="mailto:kirbym3@go.stockton.edu"><span class="label">Email</span></a></li>
+			</ul>
+		</div>
+		<div class="copyright">
+			&copy; 2020. All rights reserved.
+		</div>
+	</footer>
+
+</body>
+
+</html>

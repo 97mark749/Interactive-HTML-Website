@@ -1,0 +1,867 @@
+<html>
+
+<head>
+    <title>Common Converters</title>
+    <link rel="stylesheet" href="style.css">
+    	<!-- Scripts -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.scrollex.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="parallax.min.js"></script>
+    <script src="https://kit.fontawesome.com/e10847db4d.js" crossorigin="anonymous"></script>
+    <script = "text/Javascript">
+
+        function calcValWeight(){
+            // use value of dropdown menu 1 to find correct inner array
+            // use value of dropdown menu 2 to find correct inner array value
+
+            var weight = [
+                        ["Kilogram",1,1000,1000000,0.001,0.0009842073,0.0011023122,2.2046244202,35.273990723,5000,6.022136652E+26],												
+                        ["Gram",0.001,1,1000,0.000001,9.842073304E-7,0.0000011023,0.0022046244,0.0352739907,5,6.022136652E+23],
+                        ["Milligram",0.000001,0.001,1,9.999999999E-10,9.842073304E-10,1.10231221E-9,0.0000022046,0.000035274,0.005,602213665200000000000],
+                        ["Metric Ton",1000000,1000000000,1,0.9842073304,1.1023122101,2204.6244202,35273.990723,5000000,6.022136652E+29],
+                        ["Long Ton",1016.04608,1016046.08,1016046080,1.01604608,1,1.12,2240,35840,5080230.4,6.118768338E+29],
+                        ["Short Ton",907.184,907184,907184000,0.907184,0.8928571429,1,2000,32000,4535920,5.463186016E+29],
+                        ["Pound",0.453592,453.592,453592,0.000453592,0.0004464286,0.0005,1,16,2267.96,2.731593008E+26],
+                        ["Ounce",0.0283495,28.3495,28349.5,0.0000283495,0.0000279018,0.00003125,0.0625,1,141.7475,1.70724563E+25],
+                        ["Carrat",0.0002,0.2,200,2.E-7,1.96841466E-7,2.20462442E-7,0.0004409249,0.0070547981,1,1.20442733E+23],
+                        ["Atomic Mass Unit",1.660540199E-27,1.660540199E-24,1.660540199E-21,1.660540199E-30,1.634315837E-30,1.830433737E-30,3.660867475E-27,5.85738796E-26,8.302700999E-24,1]
+                        ]; 
+
+            var val = document.getElementById("selectOne");
+			var result = val.options[val.selectedIndex].value;
+            var newArray = weight[result - 1];
+            var txtBoxOne = document.getElementById("txtOne").value; // Value from the input
+            var valTwo = document.getElementById("selectTwo");
+            var resultTwo = valTwo.options[valTwo.selectedIndex].value; // Value of the selectbox
+
+            document.getElementById("txtTwo").value = (weight[result-1][resultTwo] * txtBoxOne);
+        }
+
+        function calcValVolume(){
+            // use value of dropdown menu 1 to find correct inner array
+            // use value of dropdown menu 2 to find correct inner array value
+
+            var volume = [
+                        ['Cubic Meter',1,1.0E-9,1000000,1000000000,1000,1000000,264.17217686,1056.6887074,2113.3774149,4226.7548297,33814.038638,67628.077276,202884.23183,219.9692483,879.8769932,1759.7539864,35195.079728,56312.127565,168936.38269,2.399128636E-10,1.3079506193,35.314666721,61023.744095],
+                        ['Cubic Kilometer',1000000000,1,1000000000000000,1000000000000000000,1000000000000,1000000000000000,264172176858,1056688707432,2113377414864,4226754829728,33814038637823,67628077275645,202884231826936,219969248299,879876993196,1759753986393,35195079727854,56312127564566,168936382693699,0.2399128636,1307950619.3,35314666721,61023744094732],
+                        ['Cubic Centimeter',0.000001,9.999999999E-16,1,1000,0.001,1,0.0002641722,0.0010566887,0.0021133774,0.0042267548,0.0338140386,0.0676280773,0.2028842318,0.0002199692,0.000879877,0.001759754,0.0351950797,0.0563121276,0.1689363827,2.399128636E-16,0.000001308,0.0000353147,0.0610237441],
+                        ['Cubic Millimeter',1.0E-9,1.0E-18,0.001,1,0.000001,0.001,2.641721768E-7,0.0000010567,0.0000021134,0.0000042268,0.000033814,0.0000676281,0.0002028842,2.199692482E-7,8.798769931E-7,0.0000017598,0.0000351951,0.0000563121,0.0001689364,2.399128636E-19,1.307950619E-9,3.531466672E-8,0.0000610237],
+                        ['Liter',0.001,1.0E-12,1000,1000000,1,1000,0.2641721769,1.0566887074,2.1133774149,4.2267548297,33.814038638,67.628077276,202.88423183,0.2199692483,0.8798769932,1.7597539864,35.195079728,56.312127565,168.93638269,2.399128636E-13,0.0013079506,0.0353146667,61.023744095],
+                        ['Milliliter',0.000001,9.999999999E-16,1,1000,0.001,1,0.0002641722,0.0010566887,0.0021133774,0.0042267548,0.0338140386,0.0676280773,0.2028842318,0.0002199692,0.000879877,0.001759754,0.0351950797,0.0563121276,0.1689363827,2.399128636E-16,0.000001308,0.0000353147,0.0610237441],
+                        ['US Gallon',0.00378541,3.78541E-12,3785.41,3785410,3.78541,3785.41,1,4,8,16,128,256,768,0.8326737922,3.3306951688,6.6613903376,133.22780675,213.1644908,639.49347241,9.081685531E-13,0.0049511294,0.1336804926,230.99989113],
+                        ['US Quart',0.0009463525,9.463525E-13,946.3525,946352.5,0.9463525,946.3525,0.25,1,2,4,32,64,192,0.2081684481,0.8326737922,1.6653475844,33.306951688,53.291122701,159.8733681,2.270421382E-13,0.0012377823,0.0334201231,57.749972783],
+                        ['US Pint',0.0004731763,4.7317625E-13,473.17625,473176.25,0.47317625,473.17625,0.125,0.5,1,2,16,32,96,0.104084224,0.4163368961,0.8326737922,16.653475844,26.645561351,79.936684052,1.135210691E-13,0.0006188912,0.0167100616,28.874986392],
+                        ['US Cup',0.0002365881,2.36588125E-13,236.588125,236588.125,0.236588125,236.588125,0.0625,0.25,0.5,1,8,16,48,0.052042112,0.2081684481,0.4163368961,8.326737922,13.322780675,39.968342026,5.676053457E-14,0.0003094456,0.0083550308,14.437493196],
+                        ['US Fluid Ounce',0.0000295735,2.957351562E-14,29.573515625,29573.515625,0.0295735156,29.573515625,0.0078125,0.03125,0.0625,0.125,1,2,6,0.006505264,0.026021056,0.052042112,1.0408422403,1.6653475844,4.9960427532,7.095066821E-15,0.0000386807,0.0010443788,1.8046866495],
+                        ['US Table Spoon',0.0000147868,1.478675781E-14,14.786757812,14786.757812,0.0147867578,14.786757812,0.00390625,0.015625,0.03125,0.0625,0.5,1,3,0.003252632,0.013010528,0.026021056,0.5204211201,0.8326737922,2.4980213766,3.54753341E-15,0.0000193403,0.0005221894,0.9023433247],
+                        ['US Tea Spoon',0.0000049289,4.92891927E-15,4.9289192708,4928.9192708,0.0049289193,4.9289192708,0.0013020833,0.0052083333,0.0104166667,0.0208333333,0.1666666667,0.3333333333,1,0.0010842107,0.0043368427,0.0086736853,0.1734737067,0.2775579307,0.8326737922,1.182511136E-15,0.0000064468,0.0001740631,0.3007811082],
+                        ['Imperial Gallon',0.00454609,4.54609E-12,4546.09,4546090,4.54609,4546.09,1.2009504915,4.803801966,9.6076039319,19.215207864,153.72166291,307.44332582,922.32997747,1,4,8,160,256,768,1.09066547E-12,0.0059460612,0.1605436532,277.41943279],
+                        ['Imperial Quart',0.0011365225,1.1365225E-12,1136.5225,1136522.5,1.1365225,1136.5225,0.3002376229,1.2009504915,2.401900983,4.803801966,38.430415728,76.860831456,230.58249437,0.25,1,2,40,64,192,2.726663675E-13,0.0014865153,0.0401359133,69.354858198],
+                        ['Imperial Pint',0.0005682613,5.6826125E-13,568.26125,568261.25,0.56826125,568.26125,0.1501188114,0.6004752457,1.2009504915,2.401900983,19.215207864,38.430415728,115.29124718,0.125,0.5,1,20,32,96,1.363331837E-13,0.0007432577,0.0200679567,34.677429099],
+                        ['Imperial Fluid Ounce',0.0000284131,2.84130625E-14,28.4130625,28413.0625,0.0284130625,28.4130625,0.0075059406,0.0300237623,0.0600475246,0.1200950491,0.9607603932,1.9215207864,5.7645623592,0.00625,0.025,0.05,1,1.6,4.8,6.816659189E-15,0.0000371629,0.0010033978,1.7338714549],
+                        ['Imperial Table Spoon',0.0000177582,1.775816406E-14,17.758164063,17758.164063,0.0177581641,17.758164063,0.0046912129,0.0187648514,0.0375297029,0.0750594057,0.6004752457,1.2009504915,3.6028514745,0.00390625,0.015625,0.03125,0.625,1,3,4.260411993E-15,0.0000232268,0.0006271236,1.0836696593],
+                        ['Imperial Tea Spoon',0.0000059194,5.91938802E-15,5.9193880208,5919.3880208,0.005919388,5.9193880208,0.0015637376,0.0062549505,0.012509901,0.0250198019,0.2001584152,0.4003168305,1.2009504915,0.0013020833,0.0052083333,0.0104166667,0.2083333333,0.3333333333,1,1.420137331E-15,0.0000077423,0.0002090412,0.3612232198],
+                        ['Cubic Mile',4168180000,4.16818,4168180000000000,4168179999999999500,4168180000000,4168180000000000,1101117184136,4404468736544,8808937473087,17617874946175,140942999569399,281885999138799,845657997416396,916871421375,3667485685501,7334971371002,146699427420047,234719083872075,704157251616224,1,5451773612.4,147197887535,254357949660781],
+                        ['Cubic Yard',0.764554858,7.645548579E-10,764554.85798,764554857.98,764.55485798,764554.85798,201.97412116,807.89648464,1615.7929693,3231.5859386,25852.687509,51705.375017,155116.12505,168.17855739,672.71422958,1345.4284592,26908.569183,43053.710693,129161.13208,1.834265453E-10,1,27,46656],
+                        ['Cubic Foot',0.0283168466,2.831684659E-11,28316.846592,28316846.592,28.316846592,28316.846592,7.480523006,29.922092024,59.844184048,119.6883681,957.50694476,1915.0138895,5745.0416686,6.228835459,24.915341836,49.830683672,996.61367345,1594.5818775,4783.7456325,6.793575755E-12,0.037037037,1,1728],
+                        ['Cubic Inch',0.0000163871,1.6387064E-14,16.387064,16387.064,0.016387064,16.387064,0.0043290064,0.0173160255,0.034632051,0.0692641019,0.5541128153,1.1082256305,3.3246768915,0.0036046501,0.0144186006,0.0288372012,0.576744024,0.9227904384,2.7683713151,3.931467451E-15,0.0000214335,0.0005787037,1],
+                        ]; 
+
+            var val = document.getElementById("selectThree");
+			var result = val.options[val.selectedIndex].value;
+            var newArray = volume[result - 1];
+            var txtBoxOne = document.getElementById("txtThree").value; // Value from the input
+            var valTwo = document.getElementById("selectFour");
+            var resultTwo = valTwo.options[valTwo.selectedIndex].value; // Value of the selectbox
+
+            document.getElementById("txtFour").value = (volume[result-1][resultTwo] * txtBoxOne);
+            
+
+        }
+
+        function calcValArea(){
+            // use value of dropdown menu 1 to find correct inner array
+            // use value of dropdown menu 2 to find correct inner array value
+
+            var area = [
+                        ['Square Meter',1,0.000001,10000,1000000,1000000000000,0.0001,3.861018768E-7,1.1959900463,10.763910417,1550.0031,0.0002471054],
+                        ['Square Kilometer',1000000,1,10000000000,1000000000000,1000000000000000000,100,0.3861018768,1195990.0463,10763910.417,1550003100,247.10538147],
+                        ['Square Centimeter',0.0001,1.0E-10,1,100,100000000,1.0E-8,3.861018768E-11,0.000119599,0.001076391,0.15500031,2.471053814E-8],
+                        ['Square Millimeter',0.000001,1.E-12,0.01,1,1000000,9.999999999E-11,3.861018768E-13,0.000001196,0.0000107639,0.0015500031,2.471053814E-10],
+                        ['Square Micrometer',1.0E-12,1.0E-18,9.999999999E-9,0.000001,1,1.0E-16,3.861018768E-19,1.195990046E-12,1.076391041E-11,1.5500031E-9,2.471053814E-16],
+                        ['Hectare',10000,0.01,100000000,10000000000,10000000000000000,1,0.0038610188,11959.900463,107639.10417,15500031,2.4710538147],
+                        ['Square Mile',2589990,2.58999,25899900000,2589990000000,2589990000000000000,258.999,1,3097602.26,27878420.34,4014492529,640.00046695],
+                        ['Square Yard',0.83612736,8.3612736E-7,8361.2736,836127.36,836127360000,0.0000836127,3.228303429E-7,1,9,1296,0.0002066116],
+                        ['Square Foot',0.09290304,9.290304E-8,929.0304,92903.04,92903040000,0.0000092903,3.58700381E-8,0.1111111111,1,144,0.0000229568],
+                        ['Square Inch',0.00064516,6.4516E-10,6.4516,645.16,645160000,6.4516E-8,2.490974868E-10,0.0007716049,0.0069444444,1,1.594225079E-7],
+                        ['Acre',4046.8564224,0.0040468564,40468564.224,4046856422.4,4046856422400000,0.4046856422,0.0015624989,4840,43560,6272640,1],
+                        ]; 
+
+            var val = document.getElementById("selectFive");
+			var result = val.options[val.selectedIndex].value;
+            var newArray = area[result - 1];
+            var txtBoxOne = document.getElementById("txtFive").value; // Value from the input
+            var valTwo = document.getElementById("selectSix");
+            var resultTwo = valTwo.options[valTwo.selectedIndex].value; // Value of the selectbox
+
+            document.getElementById("txtSix").value = (area[result-1][resultTwo] * txtBoxOne);
+            
+
+        }
+
+        function calcValLength(){
+            // use value of dropdown menu 1 to find correct inner array
+            // use value of dropdown menu 2 to find correct inner array value
+
+            var length = [
+                        ['Meter',1,0.001,100,1000,1000000,1000000000,0.0006213689,1.0936132983,3.280839895,39.37007874,1.057008707E-16],
+                        ['Kilometer',1000,1,100000,1000000,1000000000,1000000000000,0.6213688756,1093.6132983,3280.839895,39370.07874,1.057008707E-13],
+                        ['Centimeter',0.01,0.00001,1,10,10000,10000000,0.0000062137,0.010936133,0.032808399,0.3937007874,1.057008707E-18],
+                        ['Millimeter',0.001,0.000001,0.1,1,1000,1000000,6.213688756E-7,0.0010936133,0.0032808399,0.0393700787,1.057008707E-19],
+                        ['Micrometer',0.000001,9.999999999E-10,0.0001,0.001,1,1000,6.213688756E-10,0.0000010936,0.0000032808,0.0000393701,1.057008707E-22],
+                        ['Nanometer',1.0E-9,1.0E-1,1.0E-7,0.000001,0.001,1,6.213688756E-13,1.093613298E-9,3.280839895E-9,3.937007874E-8,1.057008707E-25],
+                        ['Mile',1609.35,1.60935,160935,1609350,1609350000,1609350000000,1,1760.0065617,5280.019685,63360.23622,1.701096963E-13],
+                        ['Yard',0.9144,0.0009144,91.44,914.4,914400,914400000,0.0005681797,1,3,36,9.665287622E-17],
+                        ['Foot',0.3048,0.0003048,30.48,304.8,304800,304800000,0.0001893932,0.3333333333,1,12,3.22176254E-17],
+                        ['Inch',0.0254,0.0000254,2.54,25.4,25400,25400000,0.0000157828,0.0277777778,0.0833333333,1,2.684802117E-18],
+                        ['Light year',9460660000000000,9460660000000,946066000000000000,9460660000000000000,9.46066E+21,9.460659999E+24,5878559666946,10346303587051618,31038910761154856,372466929133858300,1],
+                        ]; 
+
+            var val = document.getElementById("selectSev");
+			var result = val.options[val.selectedIndex].value;
+            var newArray = length[result - 1];
+            var txtBoxOne = document.getElementById("txtSev").value; // Value from the input
+            var valTwo = document.getElementById("selectEight");
+            var resultTwo = valTwo.options[valTwo.selectedIndex].value; // Value of the selectbox
+
+            document.getElementById("txtEight").value = (length[result-1][resultTwo] * txtBoxOne);
+            
+
+        }
+
+        
+		function calcValSpeed() {
+			// use value of dropdown menu 1 to find correct inner array
+			// use value of dropdown menu 2 to find correct inner array value
+
+			var val = document.getElementById("select-One");
+			var resultOne = val.options[val.selectedIndex].value; // Get unit selection
+			var txtBoxOne = document.getElementById("txt-One").value; // Value from the input
+			var valTwo = document.getElementById("select-Two");
+			var resultTwo = valTwo.options[valTwo.selectedIndex].value; // Value of the selectbox
+
+
+			if (resultOne == 1 && resultTwo == 2) { // F --> C
+				final = (txtBoxOne * 1.61);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 1 && resultTwo == 3) { // F --> K
+				final = (txtBoxOne * 1.46667);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 1 && resultTwo == 4) { // C --> F
+				final = (txtBoxOne / 2.237);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 1 && resultTwo == 5) { // C --> K
+				final = (txtBoxOne / 1.151);
+				document.getElementById("txt-Two").value = final;
+			}
+
+			else if (resultOne == 2 && resultTwo == 1) { // F --> C
+				final = (txtBoxOne / 1.609);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 2 && resultTwo == 3) { // F --> K
+				final = (txtBoxOne / 1.097);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 2 && resultTwo == 4) { // C --> F
+				final = (txtBoxOne / 3.6);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 2 && resultTwo == 5) { // C --> K
+				final = (txtBoxOne / 1.852);
+				document.getElementById("txt-Two").value = final;
+			}
+
+			else if (resultOne == 3 && resultTwo == 1) { // F --> C
+				final = (txtBoxOne / 1.467);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 3 && resultTwo == 2) { // F --> K
+				final = (txtBoxOne * 1.097);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 3 && resultTwo == 4) { // C --> F
+				final = (txtBoxOne / 3.281);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 3 && resultTwo == 5) { // C --> K
+				final = (txtBoxOne / 1.688);
+				document.getElementById("txt-Two").value = final;
+			}
+
+			else if (resultOne == 4 && resultTwo == 1) { // F --> C
+				final = (txtBoxOne * 2.237);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 4 && resultTwo == 2) { // F --> K
+				final = (txtBoxOne * 3.6);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 4 && resultTwo == 3) { // C --> F
+				final = (txtBoxOne * 3.281);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 4 && resultTwo == 5) { // C --> K
+				final = (txtBoxOne * 1.944);
+				document.getElementById("txt-Two").value = final;
+			}
+
+			else if (resultOne == 5 && resultTwo == 1) { // F --> C
+				final = (txtBoxOne * 1.151);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 5 && resultTwo == 2) { // F --> K
+				final = (txtBoxOne * 1.852);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 5 && resultTwo == 3) { // C --> F
+				final = (txtBoxOne * 1.688);
+				document.getElementById("txt-Two").value = final;
+			}
+			else if (resultOne == 5 && resultTwo == 4) { // C --> K
+				final = (txtBoxOne / 1.944);
+				document.getElementById("txt-Two").value = final;
+			}
+			else { //if the selected are equal
+				document.getElementById("txt-Two").value = txtBoxOne;
+			}
+		}
+
+		function calcValTemp() {
+			// use value of dropdown menu 1 to find correct inner array
+			// use value of dropdown menu 2 to find correct inner array value
+
+			var val = document.getElementById("select-Three");
+			var resultOne = val.options[val.selectedIndex].value; // Get unit selection
+			var txtBoxOne = document.getElementById("txt-Three").value; // Value from the input
+			var valTwo = document.getElementById("select-Four");
+			var resultTwo = valTwo.options[valTwo.selectedIndex].value; // Value of the selectbox
+
+
+			if (resultOne == 1 && resultTwo == 2) { // F --> C
+				final = ((txtBoxOne - 32) * (5 / 9));
+				document.getElementById("txt-Four").value = final;
+			}
+			else if (resultOne == 1 && resultTwo == 3) { // F --> K
+				final = ((txtBoxOne - 32) * (5 / 9) + 273.15);
+				document.getElementById("txt-Four").value = final;
+			}
+			else if (resultOne == 2 && resultTwo == 1) { // C --> F
+				final = ((txtBoxOne * (9 / 5)) + 32);
+				document.getElementById("txt-Four").value = final;
+			}
+			else if (resultOne == 2 && resultTwo == 3) { // C --> K
+				final = (txtBoxOne + 273.15);
+				document.getElementById("txt-Four").value = final;
+			}
+			else if (resultOne == 3 && resultTwo == 1) { // K --> F
+				final = ((txtBoxOne - 273.15) * (9 / 5) + 32);
+				document.getElementById("txt-Four").value = final;
+			}
+			else if (resultOne == 3 && resultTwo == 2) { // K --> C
+				final = (txtBoxOne - 273.15)
+				document.getElementById("txt-Four").value = final;
+			}
+			else { //if the selected are equal
+				document.getElementById("txt-Four").value = txtBoxOne;
+			}
+		}
+
+        function getResult(id0,id1,id2,id3,id4){
+            var input = document.getElementById(id0).value; // Value from the input
+            var num = document.getElementById(id1).value;   // the value (answer)
+            var temp1 = document.getElementById(id2); 
+            var from_name = temp1.options[temp1.selectedIndex].text; // starting unit
+            var temp2 = document.getElementById(id3);
+            var to_name = temp2.options[temp2.selectedIndex].text; // new unit
+            document.getElementById(id4).innerHTML = ((input + "  " + from_name + "  ---------->  " + to_name + "<br>The result is  " + num + '  ' + to_name));
+
+
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">Conversion Paradise <span> | Mark Kirby - Ryan Steup |</span></a></div>
+        <a href="#menu">Menu</a>
+    </header>
+
+	<!-- Navigation Bar-->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="common.html">Common Convertors</a></li>
+            <li><a href="languages.html">Languages</a></li>
+            <li><a href="other.html">Conversion Charts</a></li>
+        </ul>
+        <marquee direction="left" style="padding:5px; color:#e1f5fc;">Welcome to the Common Conversion Page!
+        </marquee>
+    </nav>
+
+ 	<!--Section 1-->
+    <section id="One" class="package style-2">
+        <div class="inner">
+            <header class="align-center">
+                <p>One Click Away From Satisfaction</p>
+                <h2>Common Conversion Calculators</h2>
+            </header>
+        </div>
+
+    </section>
+
+	<!--Section 2-->
+    <section id="two" class="package style-1">
+        <div class="inner">
+            <div class="grid-style">
+                <div>
+                    <div class="box">
+                        <div class="content">
+                            <header class="align-center"> 
+                                <h2>Weight</h2>
+                            </header>
+                            <!--The conversion table-->
+                            <form class="form">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="form-header">
+                                                From:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <!--
+                                                    Note: use the onKeyUp function
+                                                    # 1
+                                                -->
+                                                <input id = "txtOne" class="input-txt-box" onKeyUp = "calcValWeight()" type="text" style="width: 315px">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <!--
+                                                    Note:use the onChange Function
+                                                    # 2
+                                                -->
+                                                <select class="selector" id = "selectOne" onChange = "calcValWeight()" size=11 style="width: 315px">
+                                                    <option value="1">Kilogram</option>
+                                                    <option value="2">Gram</option>
+                                                    <option value="3">Milligram</option>
+                                                    <option value="4">Metric Ton</option>
+                                                    <option value="5">Long Ton</option>
+                                                    <option value="6">Short Ton</option>
+                                                    <option value="7">Pound</option>
+                                                    <option value="8">Ounce</option>
+                                                    <option value="9">Carrat</option>
+                                                    <option value="10">Atomic Mass Unit</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="form-header">
+                                                To:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <!--
+                                                    Note: use the on key up function
+                                                    # 3
+                                                -->
+                                                <input id = "txtTwo" class="input-txt-box" type="text" style="width: 315px" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <!--
+                                                    Note:use the onChange Function
+                                                    # 4
+                                                -->
+                                                <select class="selector" id = "selectTwo" onChange = "calcValWeight();" onClick = "getResult('txtOne','txtTwo','selectOne','selectTwo','result1');" style="width: 315px">
+                                                    <option value="1">Kilogram</option>
+                                                    <option value="2">Gram</option>
+                                                    <option value="3">Milligram</option>
+                                                    <option value="4">Metric Ton</option>
+                                                    <option value="5">Long Ton</option>
+                                                    <option value="6">Short Ton</option>
+                                                    <option value="7">Pound</option>
+                                                    <option value="8">Ounce</option>
+                                                    <option value="9">Carrat</option>
+                                                    <option value="10">Atomic Mass Unit</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id = 'result1' class = 'result'><br><br></div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="box">
+                        <div class="content">
+                            <header class="align-center">
+                                
+                                <h2>Volume</h2>
+                            </header>
+
+
+                            <!--The conversion table-->
+                            <form action="" class="form">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="form-header">
+                                                From:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input id = "txtThree" onKeyUp = "calcValVolume()" class="input-txt-box" type="text" style="width: 315px">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <select class="selector" onChange = "calcValVolume()" id = "selectThree" size=11 style="width: 315px">
+                                                    <option value="1">Cubic Meter</option>
+                                                    <option value="2">Cubic Kilometer</option>
+                                                    <option value="3">Cubic Centimeter</option>
+                                                    <option value="4">Cubic Millimeter</option>
+                                                    <option value="5">Liter</option>
+                                                    <option value="6">Milliliter</option>
+                                                    <option value="7">US Gallon</option>
+                                                    <option value="8">US Quart</option>
+                                                    <option value="9">US Pint</option>
+                                                    <option value="10">US Cup</option>
+                                                    <option value="11">US Fluid Ounce</option>
+                                                    <option value="12">US Table Spoon</option>
+                                                    <option value="13">US Tea Spoon</option>
+                                                    <option value="14">Imperial Gallon</option>
+                                                    <option value="15">Imperial Quart</option>
+                                                    <option value="16">Imperial Pint</option>
+                                                    <option value="17">Imperial Fluid Ounce</option>
+                                                    <option value="18">Imperial Table Spoon</option>
+                                                    <option value="19">Imperial Tea Spoon</option>
+                                                    <option value="20">Cubic Mile</option>
+                                                    <option value="21">Cubic Yard</option>
+                                                    <option value="22">Cubic Foot</option>
+                                                    <option value="23">Cubic Inch</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="form-header">
+                                                To:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input id = "txtFour" class="input-txt-box" type="text" style="width: 315px" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="selector" onChange = "calcValVolume();" onClick = "getResult('txtThree','txtFour','selectThree','selectFour','result2');" id = "selectFour" style="width: 315px">
+                                                    <option value="1">Cubic Meter</option>
+                                                    <option value="2">Cubic Kilometer</option>
+                                                    <option value="3">Cubic Centimeter</option>
+                                                    <option value="4">Cubic Millimeter</option>
+                                                    <option value="5">Liter</option>
+                                                    <option value="6">Milliliter</option>
+                                                    <option value="7">US Gallon</option>
+                                                    <option value="8">US Quart</option>
+                                                    <option value="9">US Pint</option>
+                                                    <option value="10">US Cup</option>
+                                                    <option value="11">US Fluid Ounce</option>
+                                                    <option value="12">US Table Spoon</option>
+                                                    <option value="13">US Tea Spoon</option>
+                                                    <option value="14">Imperial Gallon</option>
+                                                    <option value="15">Imperial Quart</option>
+                                                    <option value="16">Imperial Pint</option>
+                                                    <option value="17">Imperial Fluid Ounce</option>
+                                                    <option value="18">Imperial Table Spoon</option>
+                                                    <option value="19">Imperial Tea Spoon</option>
+                                                    <option value="20">Cubic Mile</option>
+                                                    <option value="21">Cubic Yard</option>
+                                                    <option value="22">Cubic Foot</option>
+                                                    <option value="23">Cubic Inch</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id = 'result2' class = 'result'><br><br></div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="inner">
+
+            <div class="grid-style">
+
+                <div>
+                    <div class="box">
+                        <div class="content">
+                            <header class="align-center">
+                                
+                                <h2>Area</h2>
+                            </header>
+
+
+                            <!--The conversion table-->
+                            <form action="" class="form">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="form-header">
+                                                From:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input id = "txtFive" class="input-txt-box" onKeyUp = "calcValArea()" type="text" style="width: 315px">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <select class = "selector" id = "selectFive" onChange = "calcValArea()" size=11 style="width: 315px">
+                                                    <option value="1">Square Meter</option>
+                                                    <option value="2">Square Kilometer</option>
+                                                    <option value="3">Square Centimeter</option>
+                                                    <option value="4">Square Millimeter</option>
+                                                    <option value="5">Square Micrometer</option>
+                                                    <option value="6">Hectare</option>
+                                                    <option value="7">Square Mile</option>
+                                                    <option value="8">Square Yard</option>
+                                                    <option value="9">Square Foot</option>
+                                                    <option value="10">Square Inch</option>
+                                                    <option value="11">Acre</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="form-header">
+                                                To:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input id = "txtSix" class="input-txt-box" type="text" style="width: 315px" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class = "selector" onChange = "calcValArea();" onClick = "getResult('txtFive','txtSix','selectFive','selectSix','result3');" id = "selectSix" style="width: 315px">
+                                                    <option value="1">Square Meter</option>
+                                                    <option value="2">Square Kilometer</option>
+                                                    <option value="3">Square Centimeter</option>
+                                                    <option value="4">Square Millimeter</option>
+                                                    <option value="5">Square Micrometer</option>
+                                                    <option value="6">Hectare</option>
+                                                    <option value="7">Square Mile</option>
+                                                    <option value="8">Square Yard</option>
+                                                    <option value="9">Square Foot</option>
+                                                    <option value="10">Square Inch</option>
+                                                    <option value="11">Acre</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id = 'result3' class = 'result'><br><br></div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="box">
+                        <div class="content">
+                            <header class="align-center">
+                                
+                                <h2>Length</h2>
+                            </header>
+
+
+                            <!--The conversion table-->
+                            <form action="" class="form">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="form-header">
+                                                From:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input id = "txtSev" class="input-txt-box" onKeyUp = "calcValLength()"type="text" style="width: 315px">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <select class = "selector" id = "selectSev" onChange = "calcValLength()" size=11 style="width: 315px">
+                                                    <option value="1">Meter</option>
+                                                    <option value="2">Kilometer</option>
+                                                    <option value="3">Centimeter</option>
+                                                    <option value="4">Millimeter</option>
+                                                    <option value="5">Micrometer</option>
+                                                    <option value="6">Nanometer</option>
+                                                    <option value="7">Mile</option>
+                                                    <option value="8">Yard</option>
+                                                    <option value="9">Foot</option>
+                                                    <option value="10">Inch</option>
+                                                    <option value="11">Light Year</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="form-header">
+                                                To:
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input id = "txtEight" class="input-txt-box" type="text" style="width: 315px" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class = "selector" id = "selectEight" onChange = "calcValLength();" onClick = "getResult('txtSev','txtEight','selectSev','selectEight','result4');" style="width: 315px">
+                                                    <option value="1">Meter</option>
+                                                    <option value="2">Kilometer</option>
+                                                    <option value="3">Centimeter</option>
+                                                    <option value="4">Millimeter</option>
+                                                    <option value="5">Micrometer</option>
+                                                    <option value="6">Nanometer</option>
+                                                    <option value="7">Mile</option>
+                                                    <option value="8">Yard</option>
+                                                    <option value="9">Foot</option>
+                                                    <option value="10">Inch</option>
+                                                    <option value="11">Light Year</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id = 'result4' class = 'result'><br><br></div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+    </section>
+	<!--Section 3-->
+    <section>
+        <div class="common-parallax"></div>
+    </section>
+
+    <!--Section 4-->
+    <section class="package style-1">
+        <div class="inner">
+            <div class="grid-style">
+        <div>
+            <div class="box">
+                <div class="content">
+                    <header class="align-center">
+                        <p> MPH <---> KPH <---> Ft/Sec <---> M/Sec <---> Knots</p>
+                        <h2>Speed</h2>
+                    </header>
+                    <!--
+                        Speed
+                        1 mph = 1.61 kph
+                        1 kph = 0.62 mph
+                    -->
+                    <form action="" class="form">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="form-header">
+                                        From:
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input id="txt-One" class="input-txt-box" onKeyUp="calcValSpeed()"
+                                            type="text" style="width: 315px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select class="selector" id="select-One" onChange="calcValSpeed()"
+                                            style="width: 315px">
+                                            <option value="1">Miles Per Hour (MPH)</option>
+                                            <option value="2">Kilometers Per Hour (KPH)</option>
+                                            <option value="3">Feet Per Second (Ft/Sec)</option>
+                                            <option value="4">Meter Per Second (M/Sec)</option>
+                                            <option value="5">Knot</option>
+                                        </Select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="form-header">
+                                        To:
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!--
+                                            Note: use the onKeyUp function
+                                            # 1
+                                        -->
+                                        <input id="txt-Two" class="input-txt-box" type="text"
+                                            style="width: 315px" readonly>
+
+                                    </td>
+                                </tr>
+                                <td>
+                                    <select class="selector" id="select-Two" onChange="calcValSpeed();" onClick = "getResult('txt-One','txt-Two','select-One','select-Two','result5');"
+                                        style="width: 315px">
+                                        <option value="1">Miles Per Hour (MPH)</option>
+                                        <option value="2">Kilometers Per Hour (KPH)</option>
+                                        <option value="3">Feet Per Second (Ft/Sec)</option>
+                                        <option value="4">Meter Per Second (M/Sec)</option>
+                                        <option value="5">Knot</option>
+                                    </Select>
+                                </td>
+                            </tbody>
+                        </table>
+                        <div id = 'result5' class = 'result'><br><br></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <div class="box">
+                <div class="content">
+                    <header class="align-center">
+                        <p>°F <---> °C <---> K</p>
+                        <h2>Temperature</h2>
+                    </header>
+                    <!--
+                    -->
+                    <form action="" class="form">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="form-header">
+                                        From:
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!--
+                                            Note: use the onKeyUp function
+                                            # 1
+                                        -->
+                                        <input id="txt-Three" class="input-txt-box" onKeyUp="calcValTemp()"
+                                            type="text" style="width: 315px">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select class="selector" id="select-Three" onChange="calcValTemp()"
+                                            style="width: 315px">
+                                            <option value="1">Fahrenheit</option> (°F)</option>
+                                            <option value="2">Celcius (°C)</option>
+                                            <option value="3">Kelvin (K)</option>
+                                        </Select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="form-header">
+                                        To:
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                      
+                                        <input id="txt-Four" class="input-txt-box" type="text"
+                                            style="width: 315px" readonly>
+                                    </td>
+                                </tr>
+                                <td>
+                                    <select class="selector" id="select-Four" onChange="calcValTemp();" onClick = "getResult('txt-Three','txt-Four','select-Three','select-Four','result6');"
+                                        style="width: 315px">
+                                        <option value="1">Fahrenheit</option> (°F)</option>
+                                        <option value="2">Celcius (°C)</option>
+                                        <option value="3">Kelvin (K)</option>
+                                    </Select>
+                                </td>
+                            </tbody>
+                        </table>
+                        <div id = 'result6' class = 'result'><br><br></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div>
+            <ul>
+                <li><a href="http://www.instagram.com"><span class="label">Instagram</span></a></li>
+				<li><a href="http://www.twitter.com"><span class="label">Twitter</span></a></li>
+				<li><a href="http://www.facebook.com"><span class="label">Facebook</span></a></li>
+				<li><a href="mailto:kirbym3@go.stockton.edu"><span class="label">Email</span></a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            &copy; 2020. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
